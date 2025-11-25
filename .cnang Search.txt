@@ -1,0 +1,24 @@
+ // SEARCH
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string key = txtSearch.Text.ToLower();
+
+            var result = students
+                .Where(s => s.Id.ToLower().Contains(key) ||
+                            s.Name.ToLower().Contains(key))
+                .ToList();
+
+            dgvStudents.DataSource = null;
+            dgvStudents.DataSource = result;
+        }
+
+        // Load data lên textbox khi click dòng trong DataGridView
+        private void dgvStudents_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                txtId.Text = dgvStudents.Rows[e.RowIndex].Cells[0].Value.ToString();
+                txtName.Text = dgvStudents.Rows[e.RowIndex].Cells[1].Value.ToString();
+                txtAge.Text = dgvStudents.Rows[e.RowIndex].Cells[2].Value.ToString();
+            }
+        }
