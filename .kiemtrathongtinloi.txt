@@ -1,0 +1,100 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Hàm nhập số nguyên có kiểm tra
+int NhapSoNguyen(string thongBao, int minVal, int maxVal) {
+    int x;
+    while (true) {
+        cout << thongBao;
+        cin >> x;
+
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "❌ Lỗi: Vui lòng nhập số!\n";
+        } 
+        else if (x < minVal || x > maxVal) {
+            cout << "❌ Giá trị phải nằm trong khoảng (" 
+                 << minVal << " - " << maxVal << ")\n";
+        }
+        else {
+            cin.ignore(1000, '\n');
+            return x;
+        }
+    }
+}
+
+// Hàm nhập số thực có kiểm tra
+float NhapSoThuc(string thongBao, float minVal, float maxVal) {
+    float x;
+    while (true) {
+        cout << thongBao;
+        cin >> x;
+
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "❌ Lỗi: Vui lòng nhập số!\n";
+        } 
+        else if (x < minVal || x > maxVal) {
+            cout << "❌ Giá trị phải nằm trong khoảng (" 
+                 << minVal << " - " << maxVal << ")\n";
+        }
+        else {
+            cin.ignore(1000, '\n');
+            return x;
+        }
+    }
+}
+
+// Hàm nhập chuỗi không được để trống
+string NhapChuoi(string thongBao) {
+    string s;
+    while (true) {
+        cout << thongBao;
+        getline(cin, s);
+
+        if (s.empty()) {
+            cout << "❌ Không được để trống! Hãy nhập lại.\n";
+        } else {
+            return s;
+        }
+    }
+}
+
+// Struct SinhVien
+struct SinhVien {
+    string mssv;
+    string hoTen;
+    int tuoi;
+    float diem;
+};
+
+// Hàm nhập sinh viên có kiểm tra lỗi
+void NhapSinhVien(SinhVien &sv) {
+    sv.mssv = NhapChuoi("Nhập MSSV: ");
+    sv.hoTen = NhapChuoi("Nhập họ tên: ");
+    sv.tuoi = NhapSoNguyen("Nhập tuổi (17-100): ", 17, 100);
+    sv.diem = NhapSoThuc("Nhập điểm (0-10): ", 0, 10);
+}
+
+// Hàm xuất
+void XuatSinhVien(SinhVien sv) {
+    cout << "\n------ Thông tin sinh viên ------\n";
+    cout << "MSSV: " << sv.mssv << endl;
+    cout << "Họ tên: " << sv.hoTen << endl;
+    cout << "Tuổi: " << sv.tuoi << endl;
+    cout << "Điểm: " << sv.diem << endl;
+}
+
+int main() {
+    SinhVien sv;
+
+    cout << "=== NHẬP THÔNG TIN SINH VIÊN ===\n";
+    NhapSinhVien(sv);
+
+    XuatSinhVien(sv);
+
+    return 0;
+}
